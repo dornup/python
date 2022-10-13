@@ -33,3 +33,4 @@ for bukva in phrase:
     translate = translate + alphabet[bukva]
 print(translate)
 
+
