@@ -81,7 +81,7 @@ if stupenka_t == stupenka_igrok:
 t.end_fill()
 
 
-screen.exitonclick
+screen.exitonclick()
 
 
 
