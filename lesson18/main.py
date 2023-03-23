@@ -32,8 +32,18 @@ import easygui
 # )
 
 
-easygui.enterbox(
-    msg="Маия и, маия а, маия а, маия а а",
-    title= "dragonstea",
-    image="img/lyaguha.png"
+# easygui.enterbox(
+#     msg="Маия и, маия а, маия а, маия а а",
+#     title= "dragonstea",
+#     image="img/lyaguha.png"
+# )
+
+func = easygui.buttonbox(
+    msg = "Чего делать будем?",
+    choices = ("зарабатывать", "покупать дом")
 )
+if func == "зарабатывать":
+    answer = easygui.msgbox(
+        msg = "ты заработал 100 монеток",
+        ok_button = "пон"
+    )
