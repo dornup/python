@@ -2,7 +2,7 @@ from classiki import User
 
 # Инициализация
 
-u1 = User("Дорн", "Мелания", "dornup", "9876o")
+u1 = User(fam="Дорн", nam="Мелания", log="dornup", pas="9876o")
 u2 = User()
 
 # Авторизация
