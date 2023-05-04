@@ -1,7 +1,12 @@
 import tkinter as tk
 root = tk.Tk()
 root.geometry("500x500")
-const = (("Сложение", "+"),("Вычитание", "-"),("Умножение", "*"),("Степень", "**"),("Деление", "/"),("Деление(целая часть)", "//"),("Деление(остаток)", "%"))
+const = (("Сложение", "+"),
+         ("Вычитание", "-"),
+         ("Умножение", "*"),
+         ("Степень", "**"),("Деление", "/"),
+         ("Деление(целая часть)", "//"),
+         ("Деление(остаток)", "%"))
 lambda1 = lambda x,y: int(x)+int(y) if type(x) != "<class 'method'>" and type(y) != "<class 'method'>" else " "
 lambda2 = lambda x,y: int(x)-int(y) if x != "" and y != "" else ""
 lambda3 = lambda x,y: int(x)*int(y) if x != "" and y != "" else ""
@@ -9,6 +14,7 @@ lambda4 = lambda x,y: pow(int(x), int(y)) if x != "" and y != "" else ""
 lambda5 = lambda x,y: int(x)/int(y) if x != "" and y != "" and y != "0" else ""
 lambda6 = lambda x,y: int(x)//int(y) if x != "" and y != "" and y != "0" else ""
 lambda7 = lambda x,y: int(x)%int(y) if x != "" and y != "" and y != "0" else ""
+
 def chek(a):
     lst = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',]
     for element in lst:
