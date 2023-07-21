@@ -1,40 +1,23 @@
 # динамическое программирование
 
-weight = {"guitar": 1,
-          "recorder": 4,
-          "notebook": 3}
-price = {"guitar": 1500,
-         "recorder": 3000,
-         "notebook": 2000}
+weight = {1: 1,
+          2: 4,
+          3: 3}
+price = {1: 1500,
+         2: 3000,
+         3: 2000}
 place = {1: "guitar",
          2: "recorder",
          3: "notebook"}
 
-elements = {0: {0: None,
-                1: None,
-                2: None,
-                3: None,
-                4: None},
-            1: {0: None,
-                1: None,
-                2: None,
-                3: None,
-                4: None},
-            2: {0: None,
-                1: None,
-                2: None,
-                3: None,
-                4: None},
-            3: {0: None,
-                1: None,
-                2: None,
-                3: None,
-                4: None},
-            4: {0: None,
-                1: None,
-                2: None,
-                3: None,
-                4: None}}
+elements = {0: {0: "nothing",
+                1: "nothing",
+                2: "nothing",
+                3: "nothing",
+                4: "nothing"},
+            1: {},
+            2: {},
+            3: {}}
 
 table = {0: {0: 0,
              1: 0,
@@ -60,8 +43,14 @@ table = {0: {0: 0,
 stolen = set()
 
 for i in range(1, len(table)):
-    for k, l in table[i].keys(), table[i].values():
-        if k >= weight[place[i]]:
-            choice = {elements[i-1][k]: table[i-1][k], [place[i], elements[i-1][k - weight[place[i]]]]: price[place[i]] + table[i-1][k - weight[place[i]]]}
-            table[i][k] = max([table[i-1][k], price[place[i]] + table[i-1][k - weight[place[i]]]])
-#            best_elements =
+    for k in table[i]:
+        if k >= weight[i]:
+            print(k - weight[i])
+            if table[i - 1][k] < price[i] + table[i - 1][k - weight[i]]:
+                table[i][k] = price[i] + table[i - 1][k - weight[i]]
+                elements[i][k] = [place[i], elements[i - 1][k - weight[i]]]
+                continue
+        table[i][k] = table[i - 1][k]
+        elements[i][k] = elements[i - 1][k]
+    print(table)
+    print(elements)
