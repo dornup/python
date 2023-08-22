@@ -8,3 +8,4 @@ from aiogram.utils import executor
 
 bot = Bot(token='6439271902:AAHWCTBiDahbVSj6nzRHn-RVMcrs42uZnT0')
 dispatcher = Dispatcher(bot)
+
