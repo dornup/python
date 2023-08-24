@@ -1,0 +1,13 @@
+24.08.23 - 20:15:48 - INFO - this will be logged to a file
+24.08.23 - 20:15:48 - ERROR - Melany raised an error
+24.08.23 - 20:15:48 - ERROR - Melany raised an error
+24.08.23 - 20:15:48 - WARNING - Exception occurred
+Traceback (most recent call last):
+  File "C:\Users\Admin\PycharmProjects\python2\around_the_weather_bot\lego.py", line 34, in <module>
+    c = 1/0
+ZeroDivisionError: division by zero
+24.08.23 - 20:15:48 - ERROR - Exception occured
+Traceback (most recent call last):
+  File "C:\Users\Admin\PycharmProjects\python2\around_the_weather_bot\lego.py", line 34, in <module>
+    c = 1/0
+ZeroDivisionError: division by zero
