@@ -1,4 +1,5 @@
 import gspread
+import math
 
 gs = gspread.service_account(filename='new-world-404713-3ea0feb6f959.json')
 sh = gs.open_by_key('1zAUex3RlqXE4J3ew4bZXRCOI7roWoO3Oe-iXxfIYAlU')
@@ -33,3 +34,29 @@ for i in range(len(ns)):
         rate = round(min_sum_rates/n, 1)
 
     sh.sheet1.update_acell(f'P{i+3}', str(max_five))
+
+    days = math.ceil(max_five/3)
+    data = sh.sheet1.acell(f'S{i + 3}').split('.')
+    data_start = int(data[0])
+    data_end = data_start + days
+
+    thirty_one = ['01', '03', '05', '07', '08', '10', '12']
+    thirty = ['04', '06', '09', '11']
+    if data[1] in thirty_one:
+        while data_end > 31:
+            data_end -= 31
+
+    elif data[1] in thirty:
+        while data_end > 30:
+            data_end -= 30
+    else:
+        while data_end > 28:
+            data_end -= 28
+
+    if len(data_end) > 1:
+        data_end = f'0{data_end}'
+    else:
+        data_end = str(data_end)
+
+    sh.sheet1.update_acell()
+
