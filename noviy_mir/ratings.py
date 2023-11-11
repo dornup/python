@@ -1,7 +1,7 @@
 import gspread
 
-gs = gspread.service_account(filename='new-world-404713-3ea0feb6f959.json')
-sh = gs.open_by_key('1zAUex3RlqXE4J3ew4bZXRCOI7roWoO3Oe-iXxfIYAlU')
+gs = gspread.service_account(filename='your json file')
+sh = gs.open_by_key('your key')
 
 sheet = sh.sheet1.get_all_values()
 rates = [i.replace(',', '.') for i in sh.sheet1.col_values(12)[2:]]
@@ -84,5 +84,3 @@ for i in range(len(ns)):
 for i in range(len(ns)):
     sh.sheet1.update_acell(f'T{i+3}', output_datas[i])
     sh.sheet1.update_acell(f'P{i+3}', output_rates[i])
-
-
