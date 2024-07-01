@@ -1,3 +1,4 @@
 .idea/
 venv/
 *.db
+/tg_bot/aiogramma/very_secret_info.py
