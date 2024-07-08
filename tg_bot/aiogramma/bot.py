@@ -10,8 +10,8 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-
-
+from selenium.webdriver.common.by import By
+from lxml.html.soupparser import fromstring
 
 # все, что происходит далее - чистой воды прикол ради прикола 
 # не судите меня строго, зато я изучаю http запросы и методы
@@ -19,10 +19,48 @@ from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install())) 
 driver.get('https://geocult.ru/natalnaya-karta-onlayn-raschet')
 time.sleep(2)
-name = driver.find_element(By.CSS_SELECTOR, 'input[name="fn"]')
+name = driver.find_element(by = By.CSS_SELECTOR, value = 'input[name="fn"]')
+name.send_keys('name')
+day = driver.find_element(by = By.CSS_SELECTOR, value = 'select[name="fd"]')
+day.send_keys('18')
+month = driver.find_element(by = By.CSS_SELECTOR, value = 'select[name="fm"]')
+month.send_keys('Мая') # родительный падеж
+year = driver.find_element(by = By.CSS_SELECTOR, value = 'select[name="fy"]')
+year.send_keys('2009')
+hour = driver.find_element(by = By.CSS_SELECTOR, value = 'select[name="fh"]')
+hour.send_keys('15')
+minute = driver.find_element(by = By.CSS_SELECTOR, value = 'select[name="fmn"]')
+minute.send_keys('27')
+country = driver.find_element(value='country')
+country.send_keys('Россия')
+time.sleep(1)
+state = driver.find_element(value='state')
+state.send_keys('Новосибирская область')
+time.sleep(2)
+cityplan = driver.find_element(value='cityplan')
+time.sleep(2)
+cityplan.send_keys('Новосибирск')
+button = driver.find_element(By.CLASS_NAME, 'natal_button')
+button.click()
+driver.switch_to.window(driver.window_handles[1])
+natal = requests.get(driver.current_url)
+spaces = BeautifulSoup(natal.text, 'html.parser')
+search_space = fromstring(str(spaces))
+link = search_space.xpath('//a[contains(@class, "fancybox")]/@href')[0]
+img = requests.get(link)
+if img.status_code == 200:
+    with open("img.jpg", "wb") as file:
+        file.write(img.content)
+        print("Картинка успешно скачана")
+else:
+    print("Не удалось скачать картинку")
+
+
+# pic = driver.find_element(By.CSS_SELECTOR, 'a.fancybox img')
+
 
 # получение полей ввода
-natal = requests.get('https://geocult.ru/natalnaya-karta-onlayn-raschet')
+# natal = requests.get('https://geocult.ru/natalnaya-karta-onlayn-raschet')
 # spaces = BeautifulSoup(natal.text, 'html.parser')   # пока не нужны
 # name_s = spaces.select('input[name="fn"]')
 # day_s = spaces.select('select[name="fd"]')
@@ -30,16 +68,15 @@ natal = requests.get('https://geocult.ru/natalnaya-karta-onlayn-raschet')
 # year_s = spaces.select('select[name="fy"]')
 # hour_s = spaces.select('select[name="fh"]')
 # min_s = spaces.select('select[name="fmn"]')
-country_s = spaces.select('select#country')
-state_s = spaces.select('select#state')
-input_city = spaces.select('input#city')
+# country_s = spaces.select('select#country')
+# state_s = spaces.select('select#state')
+# input_city = spaces.select('input#city')
 
 
 # настраиваем логирование
 logging.basicConfig(level='INFO')
 # создаем объект бота
 bot = Bot(token=token)
-print(bot)
 # создаем диспетчера
 dp = Dispatcher()
 
