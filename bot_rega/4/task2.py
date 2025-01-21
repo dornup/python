@@ -19,20 +19,25 @@ for i in range(1, K):
         else:
             k_table[i][j] = k_table[i-1][j] + k_table[i][j-1]
 
+a = 1
+a_max = 1
 for i in reversed(k_table):
     f = False
-    a = 1
     for j in range(N-1, 0, -1):
         a = max(i[:j+1])
         # print(i[:j+1])
         if R % a == 0:
             f = True
+            a1 = a
             break
     if f:
-        break
+        if a1 > a_max:
+            a_max = a1
+        
+# print(a_max)
 
 # print(k_table)
-print(R//a)
+print(R//a_max)
 
 
 # print(fib(obj, K))
